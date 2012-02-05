@@ -93,7 +93,7 @@ func TestT3andM4(t *testing.T) {
     }
 
     // Rotation about X
-    M, T = M4RotateX(-ᴨ / 2), T3RotateX(-ᴨ / 2)
+    M, T = M4RotateX(-ᴨ/2), T3RotateX(-ᴨ/2)
     v, p = M.MulV4(vj), T.Transform(pj)
     if !v.Equivalent(vk, ε) {
         t.Error("M4 rotation about X: ", v)
@@ -105,29 +105,29 @@ func TestT3andM4(t *testing.T) {
 
 // More of an API test than a correctness test
 func TestVectorsAndPoints(test *testing.T) {
-	v := V3{0, 0, 1}
-	p := P3{1, 0, 0}
-	p = p.Add(v) // point + vector = point
-	p = p.Sub(v) // point - vector = point
-	t := T3Translate(0, 0, 1)
-	m := M3RotateX(ᴨ)
+    v := V3{0, 0, 1}
+    p := P3{1, 0, 0}
+    p = p.Add(v) // point + vector = point
+    p = p.Sub(v) // point - vector = point
+    t := T3Translate(0, 0, 1)
+    m := M3RotateX(ᴨ)
 
-	p = t.Transform(p) // 4x3 * 3x1 = 4x1 
-	p = p.Transform(t) // 1x4 * 4x3 = 1x3
-	
-	var v3 V3 = V3{1, 0, 0}
-	fmt.Printf("v3 is a %T\n", v3)
+    p = t.Transform(p) // 4x3 * 3x1 = 4x1 
+    p = p.Transform(t) // 1x4 * 4x3 = 1x3
 
-	var v4 V4 = t.Mul(v3) // 4x3 * 3x1 = 4x1
-	v3 = v4.Transform(t) // 1x4 * 4x3 = 1x3
-	
-	v = m.Mul(v)
+    var v3 V3 = V3{1, 0, 0}
+    fmt.Printf("v3 is a %T\n", v3)
 
-	fmt.Println(v, p, v3, v4)
+    var v4 V4 = t.Mul(v3) // 4x3 * 3x1 = 4x1
+    v3 = v4.Transform(t)  // 1x4 * 4x3 = 1x3
+
+    v = m.Mul(v)
+
+    fmt.Println(v, p, v3, v4)
 }
 
 // Test transforms-of-transforms
 func TestComposition(t *testing.T) {
-	// compose two T3s.  multiply two M3's.  Multiply two M4's.
-	// use getUpperLeft on the T3 and M4, and test for equivalence.
+    // compose two T3s.  multiply two M3's.  Multiply two M4's.
+    // use getUpperLeft on the T3 and M4, and test for equivalence.
 }

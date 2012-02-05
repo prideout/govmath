@@ -110,7 +110,7 @@ func T3RotateY(radians float32) *T3 {
     m := new(T3)
     s, c := sin(radians), cos(radians)
     m.matrix = [4 * 3]float32{
-        c, 0, s, 
+        c, 0, s,
         0, 1, 0,
         -s, 0, c,
         0, 0, 0}
@@ -163,7 +163,7 @@ func (m *T3) String() string {
         "%f %f %f\n"+
         "%f %f %f\n",
         x[0], x[1], x[2],
-		x[3], x[4], x[5],
-		x[6], x[7], x[8],
-		x[9], x[10], x[11])
+        x[3], x[4], x[5],
+        x[6], x[7], x[8],
+        x[9], x[10], x[11])
 }

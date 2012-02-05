@@ -9,7 +9,7 @@ type V3 struct {
 }
 
 func V3FromP3(p P3) V3 {
-	return V3{p.X, p.Y, p.Z}
+    return V3{p.X, p.Y, p.Z}
 }
 
 func (a V3) Dot(b V3) float32 {
@@ -18,23 +18,23 @@ func (a V3) Dot(b V3) float32 {
 
 func (a V3) Cross(b V3) V3 {
     return V3{
-        (a.Y*b.Z)-(a.Z*b.Y),
-        (a.Z*b.X)-(a.X*b.Z),
-        (a.X*b.Y)-(a.Y*b.X)}
+        (a.Y * b.Z) - (a.Z * b.Y),
+        (a.Z * b.X) - (a.X * b.Z),
+        (a.X * b.Y) - (a.Y * b.X)}
 }
 
 func (a V3) Add(b V3) V3 {
     return V3{
-        a.X+b.X,
-        a.Y+b.Y,
-        a.Z+b.Z}
+        a.X + b.X,
+        a.Y + b.Y,
+        a.Z + b.Z}
 }
 
 func (a V3) Sub(b V3) V3 {
     return V3{
-        a.X-b.X,
-        a.Y-b.Y,
-        a.Z-b.Z}
+        a.X - b.X,
+        a.Y - b.Y,
+        a.Z - b.Z}
 }
 
 func (v V3) Clone() V3 {
