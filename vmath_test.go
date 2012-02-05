@@ -113,13 +113,13 @@ func TestVectorsAndPoints(test *testing.T) {
 	m := M3RotateX(ᴨ)
 
 	p = t.Transform(p) // 4x3 * 3x1 = 4x1 
-	//p = p.Transform(t) // 1x4 * 4x3 = 1x3
+	p = p.Transform(t) // 1x4 * 4x3 = 1x3
 	
 	var v3 V3 = V3{1, 0, 0}
 	fmt.Printf("v3 is a %T\n", v3)
 
 	var v4 V4 = t.Mul(v3) // 4x3 * 3x1 = 4x1
-	//v3 = v4.Transform(t) // 1x4 * 4x3 = 1x3
+	v3 = v4.Transform(t) // 1x4 * 4x3 = 1x3
 	
 	v = m.Mul(v)
 

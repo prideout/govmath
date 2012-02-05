@@ -48,7 +48,7 @@ func (matrix *T3) Transform(p P3) P3 {
     c0 := V3{m[0], m[3], m[6]}
     c1 := V3{m[1], m[4], m[7]}
     c2 := V3{m[2], m[5], m[8]}
-    v := V3{p.X, p.Y, p.Z}
+    v := V3FromP3(p)
     x := c0.Dot(v) + m[9]
     y := c1.Dot(v) + m[10]
     z := c2.Dot(v) + m[11]

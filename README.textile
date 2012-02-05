@@ -4,12 +4,12 @@ While the name of the git repository is *govmath*, the name of the actual go pac
 
 vmath defines 6 structs, each of which has a tiny two-character name.  In the following chart, dimensions are listed in the form %{color:red}_rows_ x _columns_%.
 
-| *V3* | 1x3 or 3x1 | Vector in 3-space |
-| *V4* | 1x4 or 4x1 | Homogeneous vector |
-| *P3* | 1x3 or 3x1 | Point in 3-space, similar to a *V4* with w=1 |
-| *M3* | 3x3 | Represents rotation and scale |
-| *T3* | 4x3 | Affine transform; adds translation to *M3* |
-| *M4* | 4x4 | Homogeneous transform (suitable for perpective projection) |
+| *V3* | Vector in 3-space |
+| *V4* | Homogeneous vector |
+| *P3* | Point in 3-space; similar to a *V4* with w=1 |
+| *M3* | Represents rotation and scale |
+| *T3* | 4x3 matrix for affine transformations; adds translation to *M3* |
+| *M4* | Homogeneous transform (suitable for perpective projection) |
 
 Matrices are stored in row-major order but they can be easily transposed (e.g., for consumption by GLSL).
 

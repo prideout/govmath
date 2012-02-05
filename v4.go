@@ -45,6 +45,17 @@ func (v V4) Length() float32 {
     return sqrt(v.Dot(v))
 }
 
+func (v V4) Transform(t *T3) V3 {
+    m := &t.matrix
+    c0 := V4{m[0], m[3], m[6], m[9]}
+    c1 := V4{m[1], m[4], m[7], m[10]}
+    c2 := V4{m[2], m[5], m[8], m[11]}
+    x := c0.Dot(v)
+    y := c1.Dot(v)
+    z := c2.Dot(v)
+    return V3{x, y, z}
+}
+
 func (a V4) Equivalent(b V4, ε float32) bool {
     return true &&
         abs(b.X-a.X) < ε &&
