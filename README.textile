@@ -22,33 +22,46 @@ Vectors and points are distinct concepts.  For example, a *V3* can be added to a
 <pre>
 v := vmath.V3New(0, 0, 1)
 p := vmath.P3New(1, 0, 0)
-p = p.AddV3(v)
+p = p.Add(v)
 </pre>
 
-Adding a *V3* to another *V3* yields a *V3*:
+By design, vectors can be added to points, but points cannot be added vectors.  Adding a *V3* to another *V3* yields a *V3*:
 
 <pre>
 v1 := vmath.V3New(0, 0, 1)
 v2 := vmath.V3New(1, 0, 0)
-var v vmath.V3 = v1.AddV3(v2)
+var v vmath.V3 = v1.Add(v2)
 </pre>
 
 Unlike go's own math package, vmath is designed for 32-bit floats.  This is mostly for OpenGL compatibility:
 
 <pre>
+var v vmath.V3 = foo()
 var f float32 = v.X
-glVertexAttrib1f(foo, f)
+glVertexAttrib1f(mySlot, f)
 </pre>
 
-All functions are prefixed with the type they return (*V3New*), while all methods are postfixed with the type they take (*AddP3*).  This rule applies to matrices too:
+All non-method functions are prefixed with the type they return (e.g., *V3New*).  Methods don't have prefixes.  Functions have a type suffix if there is more than one function that performs the same operation:
 
 <pre>
+p1 := P3FromV3(a)
+p2 := P3FromV4(b)
+M1 := M4Translate(1, 0, 0)
 var ᴨ float32 = float32(math.Atan(1) * 4)
-var ε float32 = 1e-4
-Β := M4Translation(1, 0, 0)
+M2 := M3RotateX(ᴨ/2)
 </pre>
 
 Matrix methods and functions operate on pointers, while vectors and points operate on values:
 
-p{visibility:hidden}. equivalence etc
+You can always modify a vector or matrix by accessing its struct members, but all methods and functions treat them as immutable:
 
+<pre>
+// todo
+</pre>
+
+The concept of equality is dodgy with floating-point vectors, but you can always call *Equivalent* with an epsilon of your choice:
+
+<pre>
+var ε float32 = 1e-4
+// todo
+</pre>

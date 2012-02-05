@@ -11,10 +11,14 @@ type V3 struct {
 }
 
 func V3New(x, y, z float32) V3 {
+	return V3{x, y, z}
+}
+
+func V3FromP3(p P3) V3 {
     v := new(V3)
-    v.X = x
-    v.Y = y
-    v.Z = z
+    v.X = p.X
+    v.Y = p.Y
+    v.Z = p.Z
     return *v
 }
 

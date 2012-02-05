@@ -33,7 +33,7 @@ func P3FromV4(v V4) P3 {
 }
 
 func (a P3) Distance(b P3) float32 {
-    return a.Sub(b).Length()
+    return V3FromP3(a.Sub(V3FromP3(b))).Length()
 }
 
 func (a P3) Add(b V3) P3 {
@@ -43,8 +43,8 @@ func (a P3) Add(b V3) P3 {
         a.Z+b.Z)
 }
 
-func (a P3) Sub(b P3) V3 {
-    return V3New(
+func (a P3) Sub(b V3) P3 {
+    return P3New(
         a.X-b.X,
         a.Y-b.Y,
         a.Z-b.Z)
