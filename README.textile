@@ -13,7 +13,7 @@ vmath defines 6 structs, each of which has a tiny two-character name.  In the fo
 
 Matrices are stored in row-major order but they can be easily transposed (e.g., for consumption by GLSL).
 
-When vectors are premultiplied with matrices as in *V.Mul(M)*, they are treated as row vectors.  When postmultipled as in *M.Mul(V)*, they are treated as column vectors.
+When vectors are premultiplied with matrices, as in @V.Mul(M)@, they are treated as row vectors.  When postmultipled, as in @M.Mul(V)@, they are treated as column vectors.
 
 *M4* provides construction methods for right-handed and left-handed projections.
 
