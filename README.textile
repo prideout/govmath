@@ -1,4 +1,4 @@
-This is a simple linear algebra library for golang and designed solely for 3D graphics.  It defines structs and functions for points, vectors, and small matrices.  The full API reference is "here":http://www.textism.com, but keep reading this page for a quick overview.
+This is a simple linear algebra library for golang, intended solely for 3D graphics.  It defines structs and functions for points, vectors, and small matrices.  The full API reference is "here":http://www.textism.com, but keep reading this page for a quick overview.
 
 While the name of the git repository is *govmath*, the name of the actual go package is *vmath*.
 
@@ -25,7 +25,7 @@ p := vmath.P3{1, 0, 0}
 p = p.Add(v)
 </pre>
 
-By design, vectors can be added to points, but points cannot be added vectors.  Adding a *V3* to another *V3* yields a *V3*:
+Vectors can be added to points, but points cannot be added vectors.  Adding a *V3* to another *V3* yields a *V3*:
 
 <pre>
 v1 := vmath.V3{0, 0, 1}
@@ -33,21 +33,20 @@ v2 := vmath.V3{1, 0, 0}
 var v vmath.V3 = v1.Add(v2)
 </pre>
 
-Unlike go's own math package, vmath is designed for 32-bit floats.  This is mostly for OpenGL compatibility:
+Unlike go's own math package, vmath is designed for 32-bit floats rather than doubles.  This is mostly for OpenGL compatibility:
 
 <pre>
-var v vmath.V3 = foo()
-var f float32 = v.X
-glVertexAttrib1f(mySlot, f)
+v := vmath.V3{1, 1, 1}
+glVertexAttrib3fv(mySlot, &v.X)
 </pre>
 
-All non-method functions are prefixed with the type they return (e.g., *M3Identity*).  Methods don't have prefixes.  Functions also sometimes have a type suffix:
+All non-method functions are prefixed with the type they return (e.g., *M3Identity*).  Functions also sometimes have a type suffix:
 
 <pre>
 p1 := P3FromV3(a)
 p2 := P3FromV4(b)
 m := M4Translate(1, 0, 0)
-var ᴨ float32 = float32(math.Atan(1) * 4)
+ᴨ := float32(math.Atan(1) * 4)
 t := T3RotateX(ᴨ/2)
 </pre>
 
@@ -60,9 +59,9 @@ Matrix methods and functions operate on pointers, while vectors and points opera
 You can always modify a vector or matrix by accessing its struct members, but all methods and functions treat them as *immutable*:
 
 <pre>
-var m M4 = ...
+var m M4 = M4Translate(0, 0, 1)
 m.Transpose() // this does nothing
-m2 = m.Transpose() // better!
+m2 := m.Transpose() // better!
 </pre>
 
 The concept of equality is dodgy with floating-point vectors, but you can always call *Equivalent* with an epsilon of your choice:
