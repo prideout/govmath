@@ -1,6 +1,6 @@
 h1. About vmath
 
-vmath is a simple linear algebra library for golang and designed solely for 3D graphics.  It defines structs for points, vectors, and small matrices.
+vmath is a simple linear algebra library for golang and designed solely for 3D graphics.  It defines structs and functions for points, vectors, and small matrices.  The full API reference is "here":http://www.textism.com, but keep reading this page for a quick overview.
 
 The name of the go package is *vmath*; the git repository is *govmath*.
 
@@ -8,12 +8,12 @@ h1. The structs
 
 vmath defines 6 structs, each of which has a tiny two-character name.
 
-| V3 | 3x1 | Vector in 3-space |
-| V4 | 4x1 | Homogeneous vector |
-| P3 | 3x1 | Point in 3-space, similar to a *V4* with w=1 |
-| M3 | 3x3 | Can represent rotation and scale |
-| T3 | 4x3 | Affine transform; adds translation to *M3* |
-| M4 | 4x4 | Homogeneous transform (suitable for perpective projection) |
+| *V3* | 3x1 | Vector in 3-space |
+| *V4* | 4x1 | Homogeneous vector |
+| *P3* | 3x1 | Point in 3-space, similar to a *V4* with w=1 |
+| *M3* | 3x3 | Can represent rotation and scale |
+| *T3* | 4x3 | Affine transform; adds translation to *M3* |
+| *M4* | 4x4 | Homogeneous transform (suitable for perpective projection) |
 
 h1. Examples
 
@@ -22,7 +22,7 @@ Vectors and points are distinct concepts.  For example, a *V3* can be added to a
 <pre>
 v := vmath.V3New(0, 0, 1)
 p := vmath.P3New(1, 0, 0)
-var p2 vmath.P3 = p.AddV3(p)
+p = p.AddV3(v)
 </pre>
 
 Adding a *V3* to another *V3* yields a *V3*:
@@ -33,13 +33,15 @@ v2 := vmath.V3New(1, 0, 0)
 var v vmath.V3 = v.AddV3(p)
 </pre>
 
-All functions are prefixed with the type they return (*V3New*), while all methods are postfixed with the type they take (*AddP3*).
+All functions are prefixed with the type they return (*V3New*), while all methods are postfixed with the type they take (*AddP3*).  This rule applies to matrices too:
 
 <pre>
 var ᴨ float32 = float32(math.Atan(1) * 4)
 var ε float32 = 1e-4
 Β := M4Translation(1, 0, 0)
 </pre>
+
+Matrix methods and functions operate on pointers, while vectors and points operate on values:
 
 p{visibility:hidden}. equivalence etc
 
