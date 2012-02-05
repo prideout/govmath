@@ -68,5 +68,10 @@ The concept of equality is dodgy with floating-point vectors, but you can always
 
 <pre>
 var ε float32 = 1e-4
-// todo
+i := vmath.V3{1, 0, 0}
+j := vmath.V3{0, 1, 0}
+k := vmath.V3{0, 0, 1}
+if !i.Cross(j).Equivalent(k, ε) {
+    panic
+}
 </pre>
