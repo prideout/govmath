@@ -111,3 +111,12 @@ func (m *M3) String() string {
         x[3], x[4], x[5],
         x[6], x[7], x[8])
 }
+
+func (a *M3) Equivalent(b *M3, ε float32) bool {
+    for i, f := range b.matrix {
+        if abs(a.matrix[i]-f) > ε {
+            return false
+        }
+    }
+    return true
+}

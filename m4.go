@@ -40,8 +40,7 @@ func M4Scale(x, y, z float32) *M4 {
     return m
 }
 
-// RowVector * Matrix = RowVector
-func (matrix *M4) MulV4(v V4) V4 {
+func (matrix *M4) Mul(v V4) V4 {
     m := &matrix.matrix
     c0 := V4{m[0], m[4], m[8], m[12]}
     c1 := V4{m[1], m[5], m[9], m[13]}
@@ -55,7 +54,7 @@ func (matrix *M4) MulV4(v V4) V4 {
 }
 
 // Create the product of two 4x4 matrices
-func (a *M4) MulM4(b *M4) *M4 {
+func (a *M4) Compose(b *M4) *M4 {
     m := new(M4)
     for x := 0; x < 16; x += 4 {
         y, z, w := x+1, x+2, x+3
@@ -152,4 +151,13 @@ func (m *M4) String() string {
         x[4], x[5], x[6], x[7],
         x[8], x[9], x[10], x[11],
         x[12], x[13], x[14], x[15])
+}
+
+func (a *M4) Equivalent(b *M4, ε float32) bool {
+    for i, f := range b.matrix {
+        if abs(a.matrix[i]-f) > ε {
+            return false
+        }
+    }
+    return true
 }

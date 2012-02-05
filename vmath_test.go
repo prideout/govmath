@@ -67,14 +67,14 @@ func TestT3andM4(t *testing.T) {
 
     // Rotation about Z
     M, T := M4RotateZ(ᴨ/2), T3RotateZ(ᴨ/2)
-    v, p := M.MulV4(vi), T.Transform(pi)
+    v, p := M.Mul(vi), T.Transform(pi)
     if !v.Equivalent(vj, ε) {
         t.Error("M4 rotation about Z: ", v)
     }
     if !p.Equivalent(pj, ε) {
         t.Error("P3 rotation about Z: ", p)
     }
-    v, p = M.MulV4(vj), T.Transform(pj)
+    v, p = M.Mul(vj), T.Transform(pj)
     if !v.Equivalent(V4{-0.5, 0, 0, 1}, ε) {
         t.Error("M4 rotation about Z: ", v)
     }
@@ -84,7 +84,7 @@ func TestT3andM4(t *testing.T) {
 
     // Rotation about Y
     M, T = M4RotateY(ᴨ/2), T3RotateY(ᴨ/2)
-    v, p = M.MulV4(vi), T.Transform(pi)
+    v, p = M.Mul(vi), T.Transform(pi)
     if !v.Equivalent(vk, ε) {
         t.Error("M4 rotation about Y: ", v)
     }
@@ -94,7 +94,7 @@ func TestT3andM4(t *testing.T) {
 
     // Rotation about X
     M, T = M4RotateX(-ᴨ/2), T3RotateX(-ᴨ/2)
-    v, p = M.MulV4(vj), T.Transform(pj)
+    v, p = M.Mul(vj), T.Transform(pj)
     if !v.Equivalent(vk, ε) {
         t.Error("M4 rotation about X: ", v)
     }
@@ -103,7 +103,7 @@ func TestT3andM4(t *testing.T) {
     }
 }
 
-// More of an API test than a correctness test
+// More of an API sandbox than a correctness test
 func TestVectorsAndPoints(test *testing.T) {
     v := V3{0, 0, 1}
     p := P3{1, 0, 0}
@@ -127,7 +127,46 @@ func TestVectorsAndPoints(test *testing.T) {
 }
 
 // Test transforms-of-transforms
-func TestComposition(t *testing.T) {
-    // compose two T3s.  multiply two M3's.  Multiply two M4's.
-    // use getUpperLeft on the T3 and M4, and test for equivalence.
+func TestComposition(test *testing.T) {
+    t := T3RotateZ(ᴨ / 4)
+    p := P3{1, 0, 0}
+    p1 := t.Transform(p)
+    p2 := t.Transform(p1)
+    if !p2.Equivalent(P3{0, 1, 0}, ε) {
+        test.Error()
+    }
+    p2b := t.Compose(t).Transform(p)
+    if !p2.Equivalent(p2b, ε) {
+        test.Error()
+    }
+
+    m := M3RotateZ(ᴨ / 4)
+    v := V3FromP3(p)
+    v1 := m.Mul(v)
+    v2 := m.Mul(v1)
+    if !v2.Equivalent(V3{0, 1, 0}, ε) {
+        test.Error()
+    }
+    v2b := m.Compose(m).Mul(v)
+    if !v2.Equivalent(v2b, ε) {
+        test.Error()
+    }
+
+    m4 := M4RotateZ(ᴨ / 4)
+    v4 := V4FromP3(p)
+    v41 := m4.Mul(v4)
+    v42 := m4.Mul(v41)
+    if !v42.Equivalent(V4{0, 1, 0, 1}, ε) {
+        test.Error()
+    }
+    v42b := m4.Compose(m4).Mul(v4)
+    if !v42.Equivalent(v42b, ε) {
+        test.Error()
+    }
+
+    α := m4.GetUpperLeft()
+    β := t.GetUpperLeft()
+    if !α.Equivalent(β, ε) || !m.Equivalent(β, ε) {
+        test.Error()
+    }
 }

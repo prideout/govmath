@@ -2,19 +2,12 @@ package vmath
 
 import "fmt"
 
-// https://bitbucket.org/prideout/pez-viewer/src/11899f6b6f02/vmath.h
-
 type V4 struct {
     X, Y, Z, W float32
 }
 
-func V4New(x, y, z, w float32) V4 {
-    v := new(V4)
-    v.X = x
-    v.Y = y
-    v.Z = z
-    v.W = w
-    return *v
+func V4FromP3(p P3) V4 {
+    return V4{p.X, p.Y, p.Z, 1}
 }
 
 func (a V4) Dot(b V4) float32 {
@@ -22,27 +15,23 @@ func (a V4) Dot(b V4) float32 {
 }
 
 func (a V4) Add(b V4) V4 {
-    return V4New(
-        a.X+b.X,
-        a.Y+b.Y,
-        a.Z+b.Z,
-        a.W+b.W)
+    return V4{
+        a.X + b.X,
+        a.Y + b.Y,
+        a.Z + b.Z,
+        a.W + b.W}
 }
 
 func (a V4) Sub(b V4) V4 {
-    return V4New(
-        a.X-b.X,
-        a.Y-b.Y,
-        a.Z-b.Z,
-        a.W-b.W)
+    return V4{
+        a.X - b.X,
+        a.Y - b.Y,
+        a.Z - b.Z,
+        a.W - b.W}
 }
 
 func (v V4) Clone() V4 {
-    return V4New(v.X, v.Y, v.Z, v.W)
-}
-
-func (v V4) Length() float32 {
-    return sqrt(v.Dot(v))
+    return V4{v.X, v.Y, v.Z, v.W}
 }
 
 func (v V4) Transform(t *T3) V3 {
