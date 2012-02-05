@@ -17,7 +17,7 @@ var ᴨ float32 = float32(math.Atan(1) * 4)
 var ε float32 = 1e-4
 
 func BenchmarkVectors(b *testing.B) {
-    fmt.Println("No benchmarks yet.")
+    fmt.Println("No benchmarks yet...")
 }
 
 func TestV3andM3(t *testing.T) {
