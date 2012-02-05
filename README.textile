@@ -8,12 +8,12 @@ h1. The structs
 
 vmath defines 6 structs, each of which has a tiny two-character name.
 
-3x1 | V3 | Vector in R3 |
-4x1 | V4 | Homogeneous vector |
-3x1 | P3 | Point in R3, similar to a V4 with w=1 |
-3x3 | M3 | Can represent rotation and scale |
-4x3 | T3 | Affine transform; adds translation to M3 |
-4x4 | M4 | Homogeneous transform (suitable for perpective projection) |
+| V3 | 3x1 | Vector in R3 |
+| V4 | 4x1 | Homogeneous vector |
+| P3 | 3x1 | Point in R3, similar to a V4 with w=1 |
+| M3 | 3x3 | Can represent rotation and scale |
+| T3 | 4x3 | Affine transform; adds translation to M3 |
+| M4 | 4x4 | Homogeneous transform (suitable for perpective projection) |
 
 h1. Examples
 
@@ -41,5 +41,5 @@ var ε float32 = 1e-4
 Β := M4Translation(1, 0, 0)
 </code>
 
-p{visibility:hidden}. equivalence and 
+%{visibility:hidden}equivalence etc%
 
