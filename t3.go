@@ -43,7 +43,7 @@ func T3Scale(x, y, z float32) *T3 {
 
 // Transform a P3, which is like V4 with w=1
 // Another way of thinking about it: 1x4 * 4x3 = 1x3
-func (matrix *T3) MulP3(p P3) P3 {
+func (matrix *T3) Transform(p P3) P3 {
     m := &matrix.matrix
     c0 := V3New(m[0], m[3], m[6])
     c1 := V3New(m[1], m[4], m[7])
@@ -55,9 +55,21 @@ func (matrix *T3) MulP3(p P3) P3 {
     return P3New(x, y, z)
 }
 
+func (matrix *T3) Mul(v V3) V4 {
+    m := &matrix.matrix
+    c0 := V3New(m[0], m[3], m[6])
+    c1 := V3New(m[1], m[4], m[7])
+    c2 := V3New(m[2], m[5], m[8])
+    v := V3New(p.X, p.Y, p.Z)
+    x := c0.Dot(v) + m[9]
+    y := c1.Dot(v) + m[10]
+    z := c2.Dot(v) + m[11]
+    return V4New(x, y, z, w)
+}
+
 // Compose two 4x3 matrices
-// Technically this isn't matrix multiplication...XS
-func (a *T3) MulT3(b *T3) *T3 {
+// Technically this isn't matrix multiplication.
+func (a *T3) Compose(b *T3) *T3 {
     m := new(T3)
     for x := 0; x < 12; x += 3 {
         y, z := x+1, x+2

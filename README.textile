@@ -41,14 +41,14 @@ var f float32 = v.X
 glVertexAttrib1f(mySlot, f)
 </pre>
 
-All non-method functions are prefixed with the type they return (e.g., *V3New*).  Methods don't have prefixes.  Functions have a type suffix if there is more than one function that performs the same operation:
+All non-method functions are prefixed with the type they return (e.g., *V3New*).  Methods don't have prefixes.  Functions and methods sometimes have a type suffix:
 
 <pre>
 p1 := P3FromV3(a)
 p2 := P3FromV4(b)
-M1 := M4Translate(1, 0, 0)
+m := M4Translate(1, 0, 0)
 var ᴨ float32 = float32(math.Atan(1) * 4)
-M2 := M3RotateX(ᴨ/2)
+t := T3RotateX(ᴨ/2)
 </pre>
 
 Matrix methods and functions operate on pointers, while vectors and points operate on values:
@@ -56,7 +56,9 @@ Matrix methods and functions operate on pointers, while vectors and points opera
 You can always modify a vector or matrix by accessing its struct members, but all methods and functions treat them as immutable:
 
 <pre>
-// todo
+var m M4 = ...
+m.Transpose() // this does nothing
+m2 = m.Transpose() // better!
 </pre>
 
 The concept of equality is dodgy with floating-point vectors, but you can always call *Equivalent* with an epsilon of your choice:

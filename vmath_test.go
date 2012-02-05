@@ -103,6 +103,20 @@ func TestT3andM4(t *testing.T) {
     }
 }
 
+// More of an API test than a correctness test
+func TestVectorsAndPoints(t *testing.T) {
+	v := vmath.V3New(0, 0, 1)
+	p := vmath.P3New(1, 0, 0)
+	p = p.Add(v) // point + vector = point
+	p = p.Sub(v) // point - vector = point
+	t := vmath.T3Translate(0, 0, 1)
+	m := vmath.M3RotateX(ᴨ)
+	p = t.Transform(p)
+	var u V4 = t.Mul(v)
+	v = m.Mul(v)
+	fmt.Println(v, p, u)
+}
+
 // Test transforms-of-transforms
 func TestComposition(t *testing.T) {
 

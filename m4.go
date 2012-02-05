@@ -3,17 +3,6 @@ package vmath
 import "fmt"
 
 // Implements a 4x4 matrix type for 3D graphics.
-// Much like go's string type, M4 is generally immutable.
-// Unlike the V3 (et al) type, matrices use pass-by-pointer semantics.
-// Unary operations are methods:
-//    m = m.Transpose()
-//    f := m.Derivative()
-// Nullary and binary operations are functions:
-//    i := M4Identity()
-//    var x M4 = M4Mul(m, m)
-//    var y V4 = M4MulV3(m, v)
-//    var z M4 = M4MulT3(m, t)
-//    scale := M4Scale(1.5)
 type M4 struct {
     matrix [4 * 4]float32
 }
