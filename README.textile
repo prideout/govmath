@@ -1,12 +1,8 @@
-h1. About vmath
+This is a simple linear algebra library for golang and designed solely for 3D graphics.  It defines structs and functions for points, vectors, and small matrices.  The full API reference is "here":http://www.textism.com, but keep reading this page for a quick overview.
 
-vmath is a simple linear algebra library for golang and designed solely for 3D graphics.  It defines structs and functions for points, vectors, and small matrices.  The full API reference is "here":http://www.textism.com, but keep reading this page for a quick overview.
+While the name of the git repository is *govmath*, the name of the actual go package is *vmath*.
 
-The name of the go package is *vmath*; the git repository is *govmath*.
-
-h1. The structs
-
-vmath defines 6 structs, each of which has a tiny two-character name.  In the following chart, dimensions are listed in the form %{color:red}_rows_x_columns_%.
+vmath defines 6 structs, each of which has a tiny two-character name.  In the following chart, dimensions are listed in the form %{color:red}_rows_ x _columns_%.
 
 | *V3* | 1x3 or 3x1 | Vector in 3-space |
 | *V4* | 1x4 or 4x1 | Homogeneous vector |
@@ -17,13 +13,11 @@ vmath defines 6 structs, each of which has a tiny two-character name.  In the fo
 
 Matrices are stored in row-major order but they can be easily transposed (e.g., for consumption by GLSL).
 
-When vectors are premultiplied with matrices (e.g., *V.Mul(M)*), they are treated as row vectors.  When postmultipled, (e.g., *M.Mul(V)*), they are treated as column vectors.
+When vectors are premultiplied with matrices as in *V.Mul(M)*, they are treated as row vectors.  When postmultipled as in *M.Mul(V)*, they are treated as column vectors.
 
 *M4* provides construction methods for right-handed and left-handed projections.
 
-h1. Examples
-
-Vectors and points are distinct concepts.  For example, a *V3* can be added to a *P3* to yield another *P3*:
+Vectors and points are distinct concepts; a *V3* added to a *P3* yields another *P3*:
 
 <pre>
 v := vmath.V3{0, 0, 1}
@@ -47,7 +41,7 @@ var f float32 = v.X
 glVertexAttrib1f(mySlot, f)
 </pre>
 
-All non-method functions are prefixed with the type they return (e.g., *M3Identity*).  Methods don't have prefixes.  Functions and methods sometimes have a type suffix:
+All non-method functions are prefixed with the type they return (e.g., *M3Identity*).  Methods don't have prefixes.  Functions also sometimes have a type suffix:
 
 <pre>
 p1 := P3FromV3(a)
@@ -59,7 +53,11 @@ t := T3RotateX(ᴨ/2)
 
 Matrix methods and functions operate on pointers, while vectors and points operate on values:
 
-You can always modify a vector or matrix by accessing its struct members, but all methods and functions treat them as *immutable*XS:
+<pre>
+//todo
+</pre>
+
+You can always modify a vector or matrix by accessing its struct members, but all methods and functions treat them as *immutable*:
 
 <pre>
 var m M4 = ...
