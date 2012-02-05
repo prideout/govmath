@@ -4,3 +4,6 @@ package vmath
 
 // Largely inspired by:
 // https://bitbucket.org/prideout/pez-viewer/src/11899f6b6f02/vmath.h
+
+// Steal most of the stuff in README.textile
+// Look at $GOROOT/src/pkg/html/template/doc.go for a formatting example
