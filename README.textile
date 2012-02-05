@@ -6,14 +6,20 @@ The name of the go package is *vmath*; the git repository is *govmath*.
 
 h1. The structs
 
-vmath defines 6 structs, each of which has a tiny two-character name.
+vmath defines 6 structs, each of which has a tiny two-character name.  In the following chart, dimensions are listed in the form %{color:red}_rows_x_columns_%.
 
-| *V3* | 3x1 | Vector in 3-space |
-| *V4* | 4x1 | Homogeneous vector |
-| *P3* | 3x1 | Point in 3-space, similar to a *V4* with w=1 |
-| *M3* | 3x3 | Can represent rotation and scale |
+| *V3* | 1x3 or 3x1 | Vector in 3-space |
+| *V4* | 1x4 or 4x1 | Homogeneous vector |
+| *P3* | 1x3 or 3x1 | Point in 3-space, similar to a *V4* with w=1 |
+| *M3* | 3x3 | Represents rotation and scale |
 | *T3* | 4x3 | Affine transform; adds translation to *M3* |
 | *M4* | 4x4 | Homogeneous transform (suitable for perpective projection) |
+
+Matrices are stored in row-major order but they can be easily transposed (e.g., for consumption by GLSL).
+
+When vectors are premultiplied with matrices (e.g., *V.Mul(M)*), they are treated as row vectors.  When postmultipled, (e.g., *M.Mul(V)*), they are treated as column vectors.
+
+*M4* provides construction methods for right-handed and left-handed projections.
 
 h1. Examples
 
@@ -53,7 +59,7 @@ t := T3RotateX(ᴨ/2)
 
 Matrix methods and functions operate on pointers, while vectors and points operate on values:
 
-You can always modify a vector or matrix by accessing its struct members, but all methods and functions treat them as immutable:
+You can always modify a vector or matrix by accessing its struct members, but all methods and functions treat them as *immutable*XS:
 
 <pre>
 var m M4 = ...

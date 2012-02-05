@@ -111,13 +111,21 @@ func TestVectorsAndPoints(t *testing.T) {
 	p = p.Sub(v) // point - vector = point
 	t := vmath.T3Translate(0, 0, 1)
 	m := vmath.M3RotateX(ᴨ)
-	p = t.Transform(p)
-	var u V4 = t.Mul(v)
+
+	p = t.Transform(p) // 4x3 * 3x1 = 4x1 
+	p = p.Transform(t) // 1x4 * 4x3 = 1x3
+
+	var v3 V3 = vmath.V3{1, 0, 0} // if this works, do we really need "New"?
+	var v4 V4 = t.Mul(v3) // 4x3 * 3x1 = 4x1
+	v3 = v4.Transform(t) // 1x4 * 4x3 = 1x3
+	
 	v = m.Mul(v)
-	fmt.Println(v, p, u)
+
+	fmt.Println(v, p, v3, v4)
 }
 
 // Test transforms-of-transforms
 func TestComposition(t *testing.T) {
-
+	// compose two T3s.  multiply two M3's.  Multiply two M4's.
+	// use getUpperLeft on the T3 and M4, and test for equivalence.
 }

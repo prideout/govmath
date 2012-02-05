@@ -57,13 +57,14 @@ func (matrix *T3) Transform(p P3) P3 {
 
 func (matrix *T3) Mul(v V3) V4 {
     m := &matrix.matrix
-    c0 := V3New(m[0], m[3], m[6])
-    c1 := V3New(m[1], m[4], m[7])
-    c2 := V3New(m[2], m[5], m[8])
-    v := V3New(p.X, p.Y, p.Z)
-    x := c0.Dot(v) + m[9]
-    y := c1.Dot(v) + m[10]
-    z := c2.Dot(v) + m[11]
+    c0 := V3New(m[0], m[1], m[2])
+    c1 := V3New(m[3], m[4], m[5])
+    c2 := V3New(m[6], m[7], m[8])
+    c3 := V3New(m[9], m[10], m[11])
+    x := c0.Dot(v)
+    y := c1.Dot(v)
+    z := c2.Dot(v)
+    w := c3.Dot(v)
     return V4New(x, y, z, w)
 }
 
