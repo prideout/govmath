@@ -47,7 +47,7 @@ func (matrix *T3) MulP3(p P3) P3 {
     m := &matrix.matrix
     c0 := V3New(m[0], m[3], m[6])
     c1 := V3New(m[1], m[4], m[7])
-    c2 := V3New(m[2], m[6], m[10])
+    c2 := V3New(m[2], m[5], m[8])
     v := V3New(p.X, p.Y, p.Z)
     x := c0.Dot(v) + m[9]
     y := c1.Dot(v) + m[10]
@@ -86,8 +86,8 @@ func T3RotateX(radians float32) *T3 {
     s, c := sin(radians), cos(radians)
     m.matrix = [4 * 3]float32{
         1, 0, 0,
-        0, c, s,
-        0, -s, c,
+        0, c, -s,
+        0, s, c,
         0, 0, 0}
     return m
 }

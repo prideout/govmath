@@ -93,7 +93,7 @@ func TestT3andM4(t *testing.T) {
     }
 
     // Rotation about X
-    M, T = M4RotateX(-ᴨ / 2), T3RotateY(-ᴨ / 2)
+    M, T = M4RotateX(-ᴨ / 2), T3RotateX(-ᴨ / 2)
     v, p = M.MulV4(vj), T.MulP3(pj)
     if !v.Equivalent(vk, ε) {
         t.Error("M4 rotation about X: ", v)
