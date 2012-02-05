@@ -2,7 +2,7 @@ This is a simple linear algebra library for golang, intended solely for 3D graph
 
 While the name of the git repository is *govmath*, the name of the actual go package is *vmath*.
 
-vmath defines 6 structs, each of which has a tiny two-character name.  In the following chart, dimensions are listed in the form %{color:red}_rows_ x _columns_%.
+vmath defines six types, each of which has a tiny two-character name:
 
 | *V3* | Vector in 3-space |
 | *V4* | Homogeneous vector |
