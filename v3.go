@@ -4,22 +4,12 @@ import (
     "fmt"
 )
 
-// https://bitbucket.org/prideout/pez-viewer/src/11899f6b6f02/vmath.h
-
 type V3 struct {
     X, Y, Z float32
 }
 
-func V3New(x, y, z float32) V3 {
-	return V3{x, y, z}
-}
-
 func V3FromP3(p P3) V3 {
-    v := new(V3)
-    v.X = p.X
-    v.Y = p.Y
-    v.Z = p.Z
-    return *v
+	return V3{p.X, p.Y, p.Z}
 }
 
 func (a V3) Dot(b V3) float32 {
@@ -27,28 +17,28 @@ func (a V3) Dot(b V3) float32 {
 }
 
 func (a V3) Cross(b V3) V3 {
-    return V3New(
+    return V3{
         (a.Y*b.Z)-(a.Z*b.Y),
         (a.Z*b.X)-(a.X*b.Z),
-        (a.X*b.Y)-(a.Y*b.X))
+        (a.X*b.Y)-(a.Y*b.X)}
 }
 
 func (a V3) Add(b V3) V3 {
-    return V3New(
+    return V3{
         a.X+b.X,
         a.Y+b.Y,
-        a.Z+b.Z)
+        a.Z+b.Z}
 }
 
 func (a V3) Sub(b V3) V3 {
-    return V3New(
+    return V3{
         a.X-b.X,
         a.Y-b.Y,
-        a.Z-b.Z)
+        a.Z-b.Z}
 }
 
 func (v V3) Clone() V3 {
-    return V3New(v.X, v.Y, v.Z)
+    return V3{v.X, v.Y, v.Z}
 }
 
 func (v V3) Length() float32 {

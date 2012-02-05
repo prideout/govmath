@@ -3,16 +3,6 @@ package vmath
 import "fmt"
 
 // Implements a 3x3 matrix type for 3D graphics.
-// Much like go's string type, M3 is generally immutable.
-// Unlike the V3 (et al) type, matrices use pass-by-pointer semantics.
-// Unary operations are methods:
-//    m = m.Transpose()
-//    f := m.Derivative()
-// Nullary and binary operations are functions:
-//    i := M3Identity()
-//    var x M3 = M4Mul(m, m)
-//    var y V3 = M3MulV3(m, v)
-//    scale := M3Scale(1.5)
 type M3 struct {
     matrix [3 * 3]float32
 }
@@ -38,7 +28,7 @@ func M3Scale(x, y, z float32) *M3 {
 }
 
 // Create the product of two 3x3 matrices
-func (a *M3) MulM3(b *M3) *M3 {
+func (a *M3) Compose(b *M3) *M3 {
     m := new(M3)
     for x := 0; x < 9; x += 3 {
         y, z := x+1, x+2
@@ -56,7 +46,7 @@ func (a *M3) MulM3(b *M3) *M3 {
 }
 
 // Transform a vector and return the result
-func (m *M3) MulV3(v V3) V3 {
+func (m *M3) Mul(v V3) V3 {
     x := v.X*m.matrix[0] +
         v.Y*m.matrix[3] +
         v.Z*m.matrix[6]
@@ -66,7 +56,7 @@ func (m *M3) MulV3(v V3) V3 {
     z := v.X*m.matrix[2] +
         v.Y*m.matrix[5] +
         v.Z*m.matrix[8]
-    return V3New(x, y, z)
+    return V3{x, y, z}
 }
 
 // Create a 3x3 for rotation about the X-axis

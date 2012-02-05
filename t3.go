@@ -45,27 +45,27 @@ func T3Scale(x, y, z float32) *T3 {
 // Another way of thinking about it: 1x4 * 4x3 = 1x3
 func (matrix *T3) Transform(p P3) P3 {
     m := &matrix.matrix
-    c0 := V3New(m[0], m[3], m[6])
-    c1 := V3New(m[1], m[4], m[7])
-    c2 := V3New(m[2], m[5], m[8])
-    v := V3New(p.X, p.Y, p.Z)
+    c0 := V3{m[0], m[3], m[6]}
+    c1 := V3{m[1], m[4], m[7]}
+    c2 := V3{m[2], m[5], m[8]}
+    v := V3{p.X, p.Y, p.Z}
     x := c0.Dot(v) + m[9]
     y := c1.Dot(v) + m[10]
     z := c2.Dot(v) + m[11]
-    return P3New(x, y, z)
+    return P3{x, y, z}
 }
 
 func (matrix *T3) Mul(v V3) V4 {
     m := &matrix.matrix
-    c0 := V3New(m[0], m[1], m[2])
-    c1 := V3New(m[3], m[4], m[5])
-    c2 := V3New(m[6], m[7], m[8])
-    c3 := V3New(m[9], m[10], m[11])
+    c0 := V3{m[0], m[1], m[2]}
+    c1 := V3{m[3], m[4], m[5]}
+    c2 := V3{m[6], m[7], m[8]}
+    c3 := V3{m[9], m[10], m[11]}
     x := c0.Dot(v)
     y := c1.Dot(v)
     z := c2.Dot(v)
     w := c3.Dot(v)
-    return V4New(x, y, z, w)
+    return V4{x, y, z, w}
 }
 
 // Compose two 4x3 matrices
@@ -152,7 +152,7 @@ func (m *T3) GetUpperLeft() *M3 {
 // Return last row of matrix
 func (m *T3) GetTranslation() V3 {
     x := &m.matrix
-    return V3New(x[9], x[10], x[11])
+    return V3{x[9], x[10], x[11]}
 }
 
 // Get string representation to appease fmt.Printf

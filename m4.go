@@ -43,15 +43,15 @@ func M4Scale(x, y, z float32) *M4 {
 // RowVector * Matrix = RowVector
 func (matrix *M4) MulV4(v V4) V4 {
     m := &matrix.matrix
-    c0 := V4New(m[0], m[4], m[8], m[12])
-    c1 := V4New(m[1], m[5], m[9], m[13])
-    c2 := V4New(m[2], m[6], m[10], m[14])
-    c3 := V4New(m[3], m[7], m[11], m[15])
+    c0 := V4{m[0], m[4], m[8], m[12]}
+    c1 := V4{m[1], m[5], m[9], m[13]}
+    c2 := V4{m[2], m[6], m[10], m[14]}
+    c3 := V4{m[3], m[7], m[11], m[15]}
     x := c0.Dot(v)
     y := c1.Dot(v)
     z := c2.Dot(v)
     w := c3.Dot(v)
-    return V4New(x, y, z, w)
+    return V4{x, y, z, w}
 }
 
 // Create the product of two 4x4 matrices
@@ -138,7 +138,7 @@ func (m *M4) GetUpperLeft() *M3 {
 // Return last row of matrix
 func (m *M4) GetTranslation() V3 {
     x := &m.matrix
-    return V3New(x[12], x[13], x[14])
+    return V3{x[12], x[13], x[14]}
 }
 
 // Get string representation to appease fmt.Printf
