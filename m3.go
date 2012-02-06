@@ -101,6 +101,17 @@ func (m *M3) Clone() *M3 {
     return n
 }
 
+func (self *M3) Transpose() *M3 {
+    n := new(M3)
+    m := &self.matrix
+    n.matrix = [...]float32{
+        m[0], m[3], m[6],
+        m[1], m[4], m[7],
+        m[2], m[5], m[8],
+    }
+    return n
+}
+
 // Get string representation to appease fmt.Printf
 func (m *M3) String() string {
     x := m.matrix

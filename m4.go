@@ -123,6 +123,18 @@ func (m *M4) Clone() *M4 {
     return n
 }
 
+func (self *M4) Transpose() *M4 {
+    n := new(M4)
+    m := &self.matrix
+    n.matrix = [...]float32{
+        m[0], m[4], m[8], m[12],
+        m[1], m[5], m[9], m[13],
+        m[2], m[6], m[10], m[14],
+        m[3], m[7], m[11], m[15],
+    }
+    return n
+}
+
 // Return a M3 object for the upper-left portion
 func (m *M4) GetUpperLeft() *M3 {
     n := new(M3)
