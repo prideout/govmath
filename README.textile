@@ -75,3 +75,14 @@ if !i.Cross(j).Equivalent(k, ε) {
     panic
 }
 </pre>
+
+Installation
+============
+
+<pre>
+git clone git@github.com:prideout/govmath
+cd govmath
+export GOPATH=$GOPATH:$PWD
+go install ./src/pkg/vmath
+</pre>
+
