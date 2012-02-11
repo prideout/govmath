@@ -83,6 +83,11 @@ Installation
 git clone git@github.com:prideout/govmath
 cd govmath
 export GOPATH=$GOPATH:$PWD
-go install ./src/pkg/vmath
+go install ./src/vmath
+go test ./src/vmath
 </pre>
 
+TODO:
+
+* Create a clean filter ala http://progit.org/book/ch7-2.html
+* gofmt -tabs=false -tabwidth=4 -w=true *.go
