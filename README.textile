@@ -1,6 +1,6 @@
 This is a simple linear algebra library for golang, intended solely for 3D graphics.  It defines structs and functions for points, vectors, and small matrices.  The full API reference is "here":http://www.textism.com, but keep reading this page for a quick overview.
 
-While the name of the git repository is *govmath*, the name of the actual go package is *vmath*.
+This package is currently under construction, and it's by no means complete.  While the name of the git repository is *govmath*, the name of the actual go package is *vmath*.
 
 vmath defines six types, each of which has a tiny two-character name:
 
@@ -76,8 +76,7 @@ if !i.Cross(j).Equivalent(k, ε) {
 }
 </pre>
 
-Installation
-============
+h2. Installation
 
 <pre>
 git clone git@github.com:prideout/govmath
